@@ -1,0 +1,29 @@
+#!/bin/bash
+
+# Test script for all problems.
+
+#PROBLEMS="A B C D E F G H"
+PROBLEMS="A B C"
+
+test_result=0
+for prob in $PROBLEMS; do
+	test_case_path="./problems/$prob/data"
+	data=$(ls $test_case_path | sed 's/[.in|.out]// g' | uniq | sort -n)
+	succeded=1
+	for i in $data; do
+		out=$(./test ./solutions/$prob.py $test_case_path/$i.in $test_case_path/$i.out)
+		if [ "$?" -ne 0 ]; then
+			echo "Test failed for $prob: $out"
+			succeded=0
+			test_result=1
+			break
+		fi
+	done
+
+	if [ $succeded -eq 1 ]; then
+		echo "Test succeded for $prob."
+	fi
+
+done
+
+exit $test_result

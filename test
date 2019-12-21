@@ -1,0 +1,36 @@
+#!/bin/bash
+
+# Solution test script.
+# Usage: ./test [solution file name] [input] [output]
+ 
+function usage {
+	echo "Usage: ./test [solution file name] [input] [output]"
+}
+
+PYTHON="/usr/bin/env python3"
+
+if [ $# -lt 3 ]; then
+	usage
+	exit 1
+fi
+
+solution_file="$1"
+input_file="$2"
+output_file="$3"
+
+result=$(cat $input_file | $PYTHON $solution_file)
+exit_code="$?"
+
+if [ $exit_code -ne 0 ]; then
+	echo "runtime error."
+	exit $exit_code
+fi
+
+if [ "$result" = "$(cat $output_file)" ]; then
+	# Success
+	exit 0
+else
+	# Fail	
+	echo "test failed with $input_file and $output_file."
+	exit 1
+fi
