@@ -9,11 +9,6 @@ for i in range(0, M):
     neighbers[p1].append(p2)
     neighbers[p2].append(p1)
 
-# Make it a complete graph.
-neighbers[1].append(2)
-neighbers[N].append(N-1)
-neighbers = [x + [i-1, i+1] if i >= 2 and i <= N-1 else x for i, x in enumerate(neighbers)]
-
 q = Queue()
 q.put(S)
 
@@ -22,6 +17,15 @@ dist[S] = 0
 
 while not q.empty():
     current = q.get()
+
+    if current + 1 <= N and dist[current + 1] == -1:
+        dist[current + 1] = dist[current] + 1
+        q.put(current + 1)
+
+    if current - 1 >= 1 and dist[current - 1] == -1:
+        dist[current - 1] = dist[current] + 1
+        q.put(current - 1)
+
     for neighber in neighbers[current]:
         if dist[neighber] == -1:
             dist[neighber] = dist[current] + 1
