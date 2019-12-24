@@ -1,4 +1,6 @@
 import collections
+import sys
+input = sys.stdin.readline
 
 N, M = map(lambda x: int(x), input().split(' '))
 S, E = map(lambda x: int(x), input().split(' '))
