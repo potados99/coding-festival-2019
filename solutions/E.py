@@ -1,3 +1,5 @@
+import collections
+
 N, M = map(lambda x: int(x), input().split(' '))
 S, E = map(lambda x: int(x), input().split(' '))
 neighbers = [[] for x in range(0, N+1)]
@@ -6,16 +8,14 @@ for i in range(0, M):
     neighbers[p1].append(p2)
     neighbers[p2].append(p1)
 
-q = list()
+q = collections.deque()
 q.append(S)
-front = 0
 
 dist = [None for x in range(0, N + 1)]
 dist[S] = 0
 
-while front < len(q):
-    current = q[front]
-    front += 1
+while dist[E] == None:
+    current = q.popleft()
 
     if current + 1 <= N and dist[current + 1] == None:
         dist[current + 1] = dist[current] + 1
