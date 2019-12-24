@@ -19,4 +19,4 @@ jobs:
         python-version: ${{ matrix.python-version }}
     - name: Test all
       run: |
-        ./test A B C
+        ./test A B C D
