@@ -1,4 +1,3 @@
-import collections
 import sys
 input = sys.stdin.readline
 
@@ -10,14 +9,16 @@ for i in range(0, M):
     neighbers[p1].append(p2)
     neighbers[p2].append(p1)
 
-q = collections.deque()
+q = list()
 q.append(S)
+front = 0
 
 dist = [None for x in range(0, N + 1)]
 dist[S] = 0
 
 while dist[E] == None:
-    current = q.popleft()
+    current = q[front]
+    front += 1
 
     if current + 1 <= N and dist[current + 1] == None:
         dist[current + 1] = dist[current] + 1
