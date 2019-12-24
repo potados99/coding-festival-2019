@@ -7,7 +7,6 @@ for i in range(0, M):
 n_destroyed = int(input())
 destroyed = set(map(lambda x: int(x), input().split(' ')))
 
-
 # Get bombed cities.
 cities = set(range(1, N+1))
 not_destroyed = cities - destroyed
